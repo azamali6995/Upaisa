@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "858747511655",
+    "project_id": "upaisa-8a8da",
+    "storage_bucket": "upaisa-8a8da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858747511655:android:c21eecc20bbe2a79f045c2",
+        "android_client_info": {
+          "package_name": "com.upaisa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858747511655-jt1odqs0i8nb4tsubrm607t0lkve16k6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWuzg4yhGBElu9kxsvZHe4lC-pPASgcZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858747511655-jt1odqs0i8nb4tsubrm607t0lkve16k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
