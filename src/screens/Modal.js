@@ -29,33 +29,11 @@ const handlePress = ()=>{
   );
 }
 
-// transparent
-//         animationType={'fade'}
-//         style={{flex: 1, backgroundColor: 'white'}}
-//         visible={vasibility}
-
 const styles= StyleSheet.create({
-  container : {flex:1, alignItems:"center", justifyContent:"center"},
+  container : {flex:1, alignItems:"center", justifyContent:"center",},
   component : {height:500, width:298, borderRadius: 15, alignItems:"flex-end", justifyContent:"flex-end", },
   cross : {height:43, width:298, backgroundColor:"rgb(63,63,63)", borderTopRightRadius:15, borderTopLeftRadius:15},
 
 })
 
 export default ModalContainer;
-
-
-
-        {/* <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'yellow',
-        }}>
-        <View>
-          <Image
-            source={require('../Images/modal1.png')}
-            style={{borderRadius: 10}}
-          />
-        </View>
-      </View> */}

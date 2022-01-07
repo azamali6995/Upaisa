@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Modal from './Modal'
-import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
 import Swiper from 'react-native-swiper'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 
 
 
-function Home() {
-   
+function Home(props) {
+
+  console.log("Props###", props )
+ 
+  const handleTranser =()=>{
+    props.navigation.navigate("Transfer");
+  }
+
+
   return (
     <View style={{flex:1, alignItems:"center", backgroundColor:"halfwhite"}} >
       <Modal />
@@ -20,6 +27,7 @@ function Home() {
         <TouchableOpacity style={{justifyContent:"center", marginTop:10,}}>
           <Entypo name ="menu" size={30} />
         </TouchableOpacity>
+
         <View style={{marginLeft:70, justifyContent:"center",}}>
           <Image style={{height: 40, resizeMode: 'contain' }} source={require('../Images/Logo.png')} />
         </View>
@@ -34,7 +42,6 @@ function Home() {
         </TouchableOpacity>   
         </View>
       </View>
-
 
       <View style={{height:180, backgroundColor:"gray" }}>
        <Swiper autoplay={true} autoplayTimeout = {5} loop={true} > 
@@ -84,7 +91,7 @@ function Home() {
 
     <View style={{height:260,  marginTop: 50, alignItems:"center",}}>
       <View style={{flexDirection:"row", }} >
-      <TouchableOpacity style ={styles.small}>
+      <TouchableOpacity style ={styles.small} onPress={handleTranser}>
         <Image style={{resizeMode:"contain", height:35}} source={require("../Images/MoneyTransfer.png")} />
          <Text>Money</Text> 
          <Text>Transfer</Text>
