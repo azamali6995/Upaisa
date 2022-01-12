@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -7,11 +7,11 @@ import { PermissionsAndroid } from 'react-native';
 import Contacts from 'react-native-contacts';
 
 
-
 function UpaisaWallet() {
+  
+  const [contacts, setContects] = useState(null)
 
   const handleContact =()=>{
-    alert("hye")
     PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
       {
@@ -22,8 +22,7 @@ function UpaisaWallet() {
     )
       .then(Contacts.getAll()
         .then((contacts) => {
-            // work with contacts
-              console.log(contacts)
+          setContects(contacts)
             })
               .catch((e) => {
                   console.log(e)
