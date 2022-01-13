@@ -35,14 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
-      };
-
-  // @Override
-  // protected List<ReactPackage> getPackages() {
-  //   return Arrays.<ReactPackage>asList(
-  //           new MainReactPackage(),
-  //           new ReactNativeContacts()); // <------ add this
-  // }    
+      };    
 
   @Override
   public ReactNativeHost getReactNativeHost() {

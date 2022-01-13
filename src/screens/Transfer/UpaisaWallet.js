@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import {View, Text, Modal, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -7,9 +7,10 @@ import { PermissionsAndroid } from 'react-native';
 import Contacts from 'react-native-contacts';
 
 
-function UpaisaWallet() {
+function UpaisaWallet(props) {
   
-  const [contacts, setContects] = useState(null)
+  const [contacts, setContects] = useState([])
+  const [cloneArry, setCloneArry] = useState([])
 
   const handleContact =()=>{
     PermissionsAndroid.request(
@@ -26,12 +27,27 @@ function UpaisaWallet() {
             })
               .catch((e) => {
                   console.log(e)
-              }))
+            }))
+
+      if(contacts.length > 0) {
+          contacts.map((data)=>{
+          setCloneArry(data)
+          handleArrayContect(data)
+         })
+        //  setModalVisible(true)
+      }    
   }
+
+    const handleArrayContect = (data) =>{ 
+        props.navigation.navigate('ContactList', {data : contacts } );
+        console.log("onceUp##", data)
+    }
+
 
     return (
         <View style={StyleS.container}>
-            <View style= {{flexDirection:"row", height:60, backgroundColor:"white", marginBottom:10 }}>
+        {console.log("lhel$$",  contacts)}
+            <View style= {{ flexDirection:"row", height:60, backgroundColor:"white", marginBottom:10 }}>
             <TouchableOpacity style={{justifyContent:"center", marginTop:10,}}>
                <AntDesign name ="left" size={30} />
             </TouchableOpacity>
@@ -49,6 +65,12 @@ function UpaisaWallet() {
             </TouchableOpacity>   
             </View>
           </View>
+{/* 
+          <Modal visible = {modalVisible}>
+            <View style ={{height:"90%", flexWrap:"wrap", backgroundColor:"yellow" }}>
+              <Text>Hello World</Text>
+            </View>
+          </Modal> */}
 
           <View style={{alignItems:"center"}}>   
            <View style ={{height:40}}>
@@ -61,7 +83,12 @@ function UpaisaWallet() {
 
           <View style={StyleS.intput1}>
                <View style={{width:230 }} >
-                 <TextInput keyboardType="numeric" style={{ marginLeft:10}}  placeholder='Enter Receiver A/C No' /> 
+                 <TextInput keyboardType="numeric" 
+                 style={{ marginLeft:10}} 
+                 placeholder='Enter Receiver A/C No'
+                //  value = {}
+                //  onChangeText={this.handle}
+                  /> 
                </View>
 
                <TouchableOpacity onPress={handleContact}  style={{justifyContent: "flex-end", width:40}}>

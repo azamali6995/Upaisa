@@ -6,26 +6,33 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Transfer from './src/screens/Transfer/Transfer'
 import UpaisaWallet from './src/screens/Transfer/UpaisaWallet';
+import ContactList from './src/screens/Transfer/ContactList';
 
-
-// const Stack = createStackNavigator()
+const Stack = createStackNavigator()
 
 function App() {
   return (
     
-    // <NavigationContainer>
-    //   <Stack.Navigator screenOptions={{headerShown: false}}>
-    //     <Stack.Screen name="Login" component={Login} />
-    //     <Stack.Screen name="Home" component={Home} />
-    //     <Stack.Screen name="Transfer" component={Transfer} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="UpaisaWallet" component={UpaisaWallet} />
+      <Stack.Screen name="ContactList" component={ContactList} />
 
-<View>
-   <UpaisaWallet />
-</View>  
+   {/* //     <Stack.Screen name="Login" component={Login} />
+    //     <Stack.Screen name="Home" component={Home} />
+    //     <Stack.Screen name="Transfer" component={Transfer} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+
+  
 
   );
 }
 
 export default App;
+
+
+
+// <View>
+//    <UpaisaWallet />
+// </View>
