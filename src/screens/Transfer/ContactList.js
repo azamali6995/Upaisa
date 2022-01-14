@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Text, ScrollView, Modal, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import {View, Text, ScrollView, SafeAreaView, Modal, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -8,20 +8,30 @@ import { Searchbar } from 'react-native-paper';
 
 function ContactList(props) {
     const [cloneArry, setCloneArry] = useState([])
+    const [phoneNumbers, setPhoneNumbers] = useState([])
+
     const [searchQuery, setSearchQuery] = React.useState('')
-    useEffect(()=>{
-        if(props.route.params.data) {
-            console.log("Once", props.route.params.data)
-            setCloneArry(props.route.params.data)
-        } 
+
+
+    useEffect(()=>{ 
+      ContactList()
     }, [])
 
+
+      const ContactList=()=>{
+         if(props.route.params.data) {
+            console.log("Once", props.route.params.data)
+            setCloneArry(props.route.params.data)
+            setPhoneNumbers(props.route.params.data)
+        } 
+      }
     
     const onChangeSearch = query => setSearchQuery(query)
 
     return (
         <View style={{ flex: 1  }}>
-        {console.log("cloneArry", cloneArry)}
+        {console.log("phoneNumbers$$$", phoneNumbers)}
+        
          <View style= {{ flexDirection:"row", height:60, backgroundColor:"white", marginBottom:10 }}>
             <TouchableOpacity style={{justifyContent:"center", marginTop:10,}}>
                <AntDesign name ="left" size={30} />
@@ -42,28 +52,48 @@ function ContactList(props) {
           </View>
 
         <View>
-           <View style={{alignItems:"center", justifyContent:"center",}}>
+           <View style={{height:40, alignItems:"center", justifyContent:"center",}}>
                <Text style={{color:"black", fontSize:20, fontWeight:"bold"}} >Select Contact</Text> 
            </View> 
            
-           <View>
+           <View style={{ alignItems:"center", justifyContent:"center",}}>
              <Searchbar
+             style={{ height:60, marginBottom:20, borderRadius:30, width:"90%", alignItems:"center", justifyContent:"center",}}
                 placeholder="Search"
                 onChangeText={onChangeSearch}
                 value={searchQuery}
                 />
            </View> 
 
-           <View style={{alignItems:"center", justifyContent:"center", backgroundColor:"yellow"}}>
-           
-           {cloneArry.map(data => {
-             return (  <View style={{alignItems:"center", justifyContent:"center", backgroundColor:"yellow"}}>
-                 <Text> {data.displayName} </Text>
-                </View>
-             )
-             
+           <SafeAreaView>
+             <ScrollView 
+             contentContainerStyle={{alignItems:"center", 
+             justifyContent:"center", 
+             }} 
+             style={{height:450,}}>
+
+              {cloneArry.map(data => {
+                let number = ""
+                  if(data.phoneNumbers.length >0) {
+                     number = data.phoneNumbers[0].number
+                  }
+              return (
+                 <> 
+                  <TouchableOpacity style={{height:80, alignContent:"center",justifyContent:"center", borderBottomWidth:1, borderColor:"darkgray", width:"100%", flexDirection:"row" }}>
+                   <View style={{width:"20%",borderRadius:50,margin:5, alignContent:"center",justifyContent:"center", backgroundColor:"black"}}>
+                      <Text style= {{color:"white"}} >Helo</Text>
+                   </View>
+                   <View style={{width:"75%", alignContent:"center",justifyContent:"center",}}>
+                    <Text style={{fontSize:20, fontWeight:"bold"}}> {data.displayName} </Text>
+                    <Text style={{fontSize:15,}}>{number} </Text></View>
+
+                    
+                  </TouchableOpacity>
+                 </>
+               ) 
            })} 
-           </View> 
+             </ScrollView>
+           </SafeAreaView> 
         </View>
 
 
