@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ScrollView, SafeAreaView, Image, TouchableOpacity, } from 'react-native'
+import { View, Text, FlatList, SafeAreaView, Image, TouchableOpacity, } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -8,13 +8,13 @@ import { Searchbar } from 'react-native-paper';
 
 function ContactList(props) {
    const [cloneArry, setCloneArry] = useState([])
+   const [NewArry, setNewCloneArry] = useState([])
    const [searchQuery, setSearchQuery] = useState('')
 
 
    useEffect(() => {
       ContactList()
    }, [])
-
 
    const ContactList = () => {
       if (props.route.params.data) {
@@ -34,12 +34,31 @@ function ContactList(props) {
             return 0;
          });
          setCloneArry(cloneArry);
+         setNewCloneArry(cloneArry);
+
 
       }
-
+   }
+   const handleChangeSearch = (text) => {
+      let listArray = NewArry
+      if (!text) {
+         setCloneArry(listArray)
+         setSearchQuery(text)
+      } else {
+         let data = []
+         data = listArray.filter(item => {
+            return (
+               item.displayName.toLowerCase().includes(text.toLowerCase())
+            )
+         })
+         setCloneArry(data)
+         setSearchQuery(text)
+      }
    }
 
-   const onChangeSearch = query => setSearchQuery(query)
+   const HandlesPhoneNum = () => {
+      props.navigation.navigate('UpaisaWallet');
+   }
 
    return (
       <View style={{ flex: 1 }}>
@@ -72,35 +91,36 @@ function ContactList(props) {
                <Searchbar
                   style={{ height: 60, marginBottom: 20, borderRadius: 30, width: "90%", alignItems: "center", justifyContent: "center", }}
                   placeholder="Search"
-                  onChangeText={onChangeSearch}
+                  onChangeText={handleChangeSearch}
                   value={searchQuery}
                />
             </View>
 
             <SafeAreaView>
-               <ScrollView
+               <FlatList
                   contentContainerStyle={{
                      alignItems: "center",
                      justifyContent: "center",
                   }}
-                  style={{ height: 450, }}>
-
-                  {cloneArry.map(data => {
+                  style={{ height: 450, }}
+                  data={cloneArry}
+                  renderItem={({ item }) => {
                      let number = ""
-                     if (data.phoneNumbers.length > 0) {
-                        number = data.phoneNumbers[0].number
+                     if (item.phoneNumbers.length > 0) {
+                        number = item.phoneNumbers[0].number
                      }
                      return (
                         <>
-                           <TouchableOpacity style={{ height: 80, alignContent: "center", justifyContent: "center", borderBottomWidth: 1, borderColor: "darkgray", width: "100%", flexDirection: "row" }}>
+                           <TouchableOpacity onPress={HandlesPhoneNum}
+                              style={{ height: 80, alignContent: "center", justifyContent: "center", borderBottomWidth: 1, borderColor: "darkgray", width: "100%", flexDirection: "row" }}>
                               <View style={{ width: "20%", borderRadius: 50, margin: 5, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
                                  <Text style={{ color: "white", fontSize: 25 }}>
-                                    {data.displayName.charAt(0)}
+                                    {item.displayName.charAt(0)}
                                  </Text>
                               </View>
                               <View style={{ width: "75%", alignContent: "center", justifyContent: "center", }}>
                                  <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                                    {data.displayName}
+                                    {item.displayName}
                                  </Text>
                                  <Text style={{ fontSize: 15, }}>{number}</Text>
                               </View>
@@ -109,8 +129,7 @@ function ContactList(props) {
                            </TouchableOpacity>
                         </>
                      )
-                  })}
-               </ScrollView>
+                  }} />
             </SafeAreaView>
          </View>
 
