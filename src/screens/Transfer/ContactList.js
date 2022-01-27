@@ -10,6 +10,8 @@ function ContactList(props) {
    const [cloneArry, setCloneArry] = useState([])
    const [NewArry, setNewCloneArry] = useState([])
    const [searchQuery, setSearchQuery] = useState('')
+   const [newContact, setNewContact] = useState('')
+
 
 
    useEffect(() => {
@@ -56,9 +58,20 @@ function ContactList(props) {
       }
    }
 
-   const HandlesPhoneNum = () => {
-      props.navigation.navigate('UpaisaWallet');
+   const HandlesPhoneNum = async (e, data) => {
+      let result = ""
+      console.log("data", data.phoneNumbers)
+      let ContactNum = ""
+      if (data.phoneNumbers.length > 0) {
+         ContactNum = data.phoneNumbers[0].number.replace(/\s/g, '')
+      }
+      if (ContactNum) {
+         result = ContactNum.replace("+92", '0')
+      }
+      await props.navigation.navigate('UpaisaWallet', { newContact: result });
    }
+
+
 
    return (
       <View style={{ flex: 1 }}>
@@ -111,7 +124,7 @@ function ContactList(props) {
                      }
                      return (
                         <>
-                           <TouchableOpacity onPress={HandlesPhoneNum}
+                           <TouchableOpacity onPress={(e) => HandlesPhoneNum(e, item)}
                               style={{ height: 80, alignContent: "center", justifyContent: "center", borderBottomWidth: 1, borderColor: "darkgray", width: "100%", flexDirection: "row" }}>
                               <View style={{ width: "20%", borderRadius: 50, margin: 5, alignItems: "center", justifyContent: "center", backgroundColor: "black" }}>
                                  <Text style={{ color: "white", fontSize: 25 }}>
