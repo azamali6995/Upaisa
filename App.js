@@ -8,28 +8,21 @@ import Transfer from './src/screens/Transfer/Transfer'
 import UpaisaWallet from './src/screens/Transfer/UpaisaWallet';
 import ContactList from './src/screens/Transfer/ContactList';
 import PaymentPuspose from './src/screens/Transfer/PaymentPuspose';
-// const Stack = createStackNavigator()
+const Stack = createStackNavigator()
 
 function App() {
   return (
 
-    // <NavigationContainer>
-    //   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //     <Stack.Screen name="UpaisaWallet" component={UpaisaWallet} />
-    //     <Stack.Screen name="ContactList" component={ContactList} />
-
-    //     {/* //     <Stack.Screen name="Login" component={Login} />
-    // //     <Stack.Screen name="Home" component={Home} />
-    // //     <Stack.Screen name="Transfer" component={Transfer} /> */}
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-
-    <View style={{ flex: 1 }}>
-      <PaymentPuspose />
-    </View>
-
-
-
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Transfer" component={Transfer} />
+        <Stack.Screen name="UpaisaWallet" component={UpaisaWallet} />
+        <Stack.Screen name="ContactList" component={ContactList} />
+        <Stack.Screen name="PaymentPuspose" component={PaymentPuspose} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

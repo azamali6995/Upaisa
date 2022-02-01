@@ -48,6 +48,11 @@ function UpaisaWallet(props) {
   }
 
 
+  const handleSelctOption = () => {
+    props.navigation.navigate('PaymentPuspose');
+    // console.log("onceUp##", data)
+  }
+
 
   return (
     <View style={StyleS.container}>
@@ -129,7 +134,7 @@ function UpaisaWallet(props) {
             <TextInput style={{ marginLeft: 10 }} placeholder='Select the purpose of payment ' />
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ justifyContent: "flex-end", width: 40 }}>
+          <TouchableOpacity onPress={handleSelctOption} style={{ justifyContent: "flex-end", width: 40 }}>
             <AntDesign name="down" color="orange" size={20} />
           </TouchableOpacity>
         </View>
